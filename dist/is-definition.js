@@ -1,3 +1,17 @@
 import isAssociation from './is-association.js';
 import isResource from './is-resource.js';
-export default ((node) => isAssociation(node) && isResource(node) && node.type === 'definition');
+/**
+ * Type guard that checks if a value is a {@link Definition} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link Definition} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'definition', identifier: 'foo', url: 'https://example.com' };
+ * isDefinition(node); //=> true, node is Definition
+ * ```
+ */
+export default ((value) => isAssociation(value) &&
+    isResource(value) &&
+    value.type === 'definition');

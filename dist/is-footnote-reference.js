@@ -1,5 +1,14 @@
 import isAssociation from './is-association.js';
-import isNode from './is-node.js';
-export default ((node) => isNode(node) &&
-    node.type === 'footnoteReference' &&
-    isAssociation(node));
+/**
+ * Type guard that checks if a value is a {@link FootnoteReference} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link FootnoteReference} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'footnoteReference', identifier: 'foo' };
+ * isFootnoteReference(node); //=> true, node is FootnoteReference
+ * ```
+ */
+export default ((value) => isAssociation(value) && value.type === 'footnoteReference');

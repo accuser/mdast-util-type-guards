@@ -4,4 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const is_node_js_1 = __importDefault(require("./is-node.js"));
-exports.default = ((node) => (0, is_node_js_1.default)(node) && 'identifier' in node && typeof node.identifier === 'string');
+/**
+ * Type guard that checks if a value is a {@link Node} that implements the {@link Association} interface.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link Node} that implements the {@link Association} interface.
+ * @see {@link https://github.com/syntax-tree/mdast#association} for more information.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'definition', identifier: 'foo', url: 'https://example.com' };
+ * isAssociation(node); //=> true, node is Node & Association
+ * ```
+ */
+exports.default = ((value) => (0, is_node_js_1.default)(value) && 'identifier' in value && typeof value.identifier === 'string');

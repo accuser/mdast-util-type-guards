@@ -1,2 +1,14 @@
 import isNode from './is-node.js';
-export default ((node) => isNode(node) && node.type === 'break');
+/**
+ * Type guard that checks if a value is a {@link Break} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link Break} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'break' };
+ * isBreak(node); //=> true, node is Break
+ * ```
+ */
+export default ((value) => isNode(value) && value.type === 'break');

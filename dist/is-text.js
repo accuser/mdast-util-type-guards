@@ -1,2 +1,14 @@
 import isLiteral from './is-literal.js';
-export default ((node) => isLiteral(node) && node.type === 'text');
+/**
+ * Type guard that checks if a value is a {@link Text} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link Text} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'text', value: 'Hello, World!' };
+ * isText(node); //=> true, node is Text
+ * ```
+ */
+export default ((value) => isLiteral(value) && value.type === 'text');
