@@ -1,6 +1,6 @@
 {
 	"name": "@accuser/mdast-util-type-guards",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "TypeScript type guards for `mdast` nodes.",
 	"type": "module",
 	"main": "dist/index.js",
