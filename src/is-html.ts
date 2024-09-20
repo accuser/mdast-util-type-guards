@@ -2,4 +2,16 @@ import type { TypeGuard } from '@accuser/unist-util-type-guards';
 import { Html } from 'mdast';
 import isLiteral from './is-literal.js';
 
-export default ((node) => isLiteral(node) && node.type === 'html') as TypeGuard<Html>;
+/**
+ * Type guard that checks if a value is an {@link Html} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is an {@link Html} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'html', value: '<h1>Hello, world!</h1>' };
+ * isHtml(node); //=> true, node is Heading
+ * ```
+ */
+export default ((value) => isLiteral(value) && value.type === 'html') as TypeGuard<Html>;

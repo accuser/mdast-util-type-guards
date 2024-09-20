@@ -2,8 +2,20 @@ import type { TypeGuard } from '@accuser/unist-util-type-guards';
 import { Heading } from 'mdast';
 import isParent from './is-parent.js';
 
-export default ((node) =>
-	isParent(node) &&
-	node.type === 'heading' &&
-	'depth' in node &&
-	typeof node.depth === 'number') as TypeGuard<Heading>;
+/**
+ * Type guard that checks if a value is a {@link Heading} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is a {@link Heading} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'heading', depth: 1, children: [] };
+ * isHeading(node); //=> true, node is Heading
+ * ```
+ */
+export default ((value) =>
+	isParent(value) &&
+	value.type === 'heading' &&
+	'depth' in value &&
+	typeof value.depth === 'number') as TypeGuard<Heading>;

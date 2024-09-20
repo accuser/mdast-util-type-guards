@@ -1,5 +1,17 @@
 import type { TypeGuard } from '@accuser/unist-util-type-guards';
 import { Emphasis } from 'mdast';
-import isLiteral from './is-literal.js';
+import isParent from './is-parent.js';
 
-export default ((node) => isLiteral(node) && node.type === 'emphasis') as TypeGuard<Emphasis>;
+/**
+ * Type guard that checks if a value is an {@link Emphasis} node.
+ *
+ * @param value - The value to test.
+ * @returns {boolean} Whether `value` is an {@link Emphasis} node.
+ *
+ * @example
+ * ```ts
+ * const node = { type: 'emphasis', children: [] };
+ * isEmphasis(node); //=> true, node is Emphasis
+ * ```
+ */
+export default ((value) => isParent(value) && value.type === 'emphasis') as TypeGuard<Emphasis>;
