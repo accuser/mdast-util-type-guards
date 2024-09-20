@@ -6,7 +6,20 @@ describe('isRoot', () => {
 		expect(isRoot({ type: 'root', children: [] })).toBe(true);
 	});
 
-	it('returns `false` for a non-root node', () => {
-		expect(isRoot({ type: 'paragraph', children: [] })).toBe(false);
-	});
+	for (const value of [
+		null,
+		undefined,
+		true,
+		false,
+		'root',
+		42,
+		[],
+		{},
+		{ type: 'root' },
+		{ type: 'paragraph', children: [] }
+	]) {
+		it('returns `false`', () => {
+			expect(isRoot(value)).toBe(false);
+		});
+	}
 });
