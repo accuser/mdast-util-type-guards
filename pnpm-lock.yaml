@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@accuser/unist-util-type-guards':
-        specifier: ^1.0.2
-        version: 1.0.2(@types/unist@3.0.3)
+        specifier: ^1.0.3
+        version: 1.0.3(@types/unist@3.0.3)
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
@@ -45,8 +45,8 @@ importers:
 
 packages:
 
-  '@accuser/unist-util-type-guards@1.0.2':
-    resolution: {integrity: sha512-IqiyxHAhQBj8aKveD/+/P+3R4jY5O7aVr9NWafLug+mq0p7xFvVJZEV1TMt4f+dSIWL2xFQRjVOLXZaj8hr34w==}
+  '@accuser/unist-util-type-guards@1.0.3':
+    resolution: {integrity: sha512-zZdN0AAC02phu9iM5sWa3qA1/4+kxCAubEOjXpg3e3PPMLzr+sXjjgzIVY8BHOX5x+jWNtQUGnhsO8WXibNAkA==}
     peerDependencies:
       '@types/unist': ^3.0.3
 
@@ -968,7 +968,7 @@ packages:
 
 snapshots:
 
-  '@accuser/unist-util-type-guards@1.0.2(@types/unist@3.0.3)':
+  '@accuser/unist-util-type-guards@1.0.3(@types/unist@3.0.3)':
     dependencies:
       '@types/unist': 3.0.3
 
