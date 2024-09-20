@@ -1,3 +1,4 @@
+export type { TypeGuard } from '@accuser/unist-util-type-guards';
 export { default as isAssociation } from './is-association.js';
 export { default as isBlockquote } from './is-blockquote.js';
 export { default as isBreak } from './is-break.js';
