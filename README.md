@@ -13,21 +13,23 @@ npm install @accuser/mdast-util-type-guards
 ```ts
 import { isText } from '@accuser/mdast-util-type-guards';
 
-const node = {
+const value = {
   type: 'text',
   value: 'Hello, world!'
 };
 
-if (isText(node)) {
-  console.log('This is a valid Mdast Text node.');
-}
+isNode(value); // true, value is Node
+isLiteral(value); // true, value is Literal
+isBlockContent(value); // false
+isPhrasingContent(value); // true, value is PhrasingContent
+isText(value); // true, value is Text
 ```
 
 ## API
 
 This package exports the identifiers:
 
-- [`isAsscoiation`](api-isassociation)
+- [`isAsscoiation`](#isassociate)
 - [`isBlockquote`](api-isblockquote)
 - [`isBreak`](api-isbreak)
 - [`isCode`](api-iscode)
@@ -61,464 +63,515 @@ This package exports the identifiers:
 
 There is no default export.
 
-### `isAssociation(node: unknown): node is Association`
+### `isAssociation(value: unknown): value is Association`
 
-Test if a given value is a valid Mdast `Association` node.
+Test if the given value is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with an `Association`(https://github.com/syntax-tree/mdast/#association).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid node with an `Association`.
+Returns `true` if `value` is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with an `Association`(https://github.com/syntax-tree/mdast/#association).
 
-###### Example
+### `isBlockContent(value: unknown): value is BlockContent`
 
-```ts
-import { isAssociation } from '@accuser/mdast-util-type-guards';
-
-const node = {
-  type: 'definition',
-  identifier: 'foo'
-  url: 'http://example.com'
-};
-
-if (isAssociation(node)) {
-  console.log(node.identifier); // 'foo'
-}
-```
-
-### `isBlockquote(node: unknown): node is Blockquote`
-
-Test if a given value is a valid Mdast `Blockquote` node.
+Test if the given value is a valid block content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Blockquote` node.
+Returns `true` if `value` is a valid block content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
-###### Example
+### `isBlockquote(value: unknown): value is Blockquote`
 
-```ts
-import { isBlockquote } from '@accuser/mdast-util-type-guards';
-
-const node = {
-  type: 'blockquote',
-  children: [
-	{
-	  type: 'paragraph',
-	  children: [
-		{
-		  type: 'text',
-		  value: 'Hello, world!'
-		}
-	  ]
-	}
-  ]
-};
-
-if (isBlockquote(node)) {
-  console.log(node.children[0]); // { type: 'paragraph', children: [ { type: 'text', value: 'Hello, world!' } ] }
-}
-```
-
-### `isBreak(node: unknown): node is Break`
-
-Test if a given value is a valid Mdast `Break` node.
+Test if the given value is a valid [`Blockquote`](https://github.com/syntax-tree/mdast/#blockquote) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Break` node.
+Returns `true` if `value` is a valid [`Blockquote`](https://github.com/syntax-tree/mdast/#blockquote) node.
 
-###### Example
+### `isBreak(value: unknown): value is Break`
 
-```ts
-import { isBreak } from '@accuser/mdast-util-type-guards';
-
-const node = {
-  type: 'break'
-};
-
-if (isBreak(node)) {
-  console.log('This is a valid Mdast Break node.');
-}
-```
-
-### `isCode(node: unknown): node is Code`
-
-Test if a given value is a valid Mdast `Code` node.
+Test if the given value is a valid [`Break`](https://github.com/syntax-tree/mdast/#break) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Code` node.
+Returns `true` if `value` is a valid [`Break`](https://github.com/syntax-tree/mdast/#break) node.
 
-### `isDefinition(node: unknown): node is Definition`
+### `isCode(value: unknown): value is Code`
 
-Test if a given value is a valid Mdast `Definition` node.
+Test if the given value is a valid [`Code`](https://github.com/syntax-tree/mdast/#code) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Definition` node.
+Returns `true` if `value` is a valid [`Code`](https://github.com/syntax-tree/mdast/#code) node.
 
-### `isDelete(node: unknown): node is Delete`
+### `isDefinitionContent(value: unknown): value is DefinitionContent`
 
-Test if a given value is a valid Mdast `Delete` node.
+Test if the given value is a valid definition content [`Node`](https://syntax-tree.github.io/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Delete` node.
+Returns `true` if `value` is a valid definition content [`Node`](https://syntax-tree.github.io/mdast/#node).
 
-### `isEmphasis(node: unknown): node is Emphasis`
+### `isDefinition(value: unknown): value is Definition`
 
-Test if a given value is a valid Mdast `Emphasis` node.
+Test if the given value is a valid [`Definition`](https://github.com/syntax-tree/mdast/#definition) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Emphasis` node.
+Returns `true` if `value` is a valid [`Definition`](https://github.com/syntax-tree/mdast/#definition) node.
 
-### `isFootnoteDefinition(node: unknown): node is FootnoteDefinition`
+### `isDelete(value: unknown): value is Delete`
 
-Test if a given value is a valid Mdast `FootnoteDefinition` node.
+Test if a given value is a valid [`Delete`](https://github.com/syntax-tree/mdast/#delete) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `FootnoteDefinition` node.
+Returns `true` if `value` is a valid [`Delete`](https://github.com/syntax-tree/mdast/#delete) node.
 
-### `isFootnoteReference(node: unknown): node is FootnoteReference`
+### `isEmphasis(value: unknown): value is Emphasis`
 
-Test if a given value is a valid Mdast `FootnoteReference` node.
+Test if a given value is a valid [`Emphasis`](https://github.com/syntax-tree/mdast/#emphasis) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `FootnoteReference` node.
+Returns `true` if `value` is a valid [`Emphasis`](https://github.com/syntax-tree/mdast/#emphasis) node.
 
-### `isHeading(node: unknown): node is Heading`
+### `isFootnoteDefinition(value: unknown): value is FootnoteDefinition`
 
-Test if a given value is a valid Mdast `Heading` node.
+Test if a given value is a valid [`FootnoteDefinition`](https://github.com/syntax-tree/mdast/#footnotedefinition) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Heading` node.
+Returns `true` if `value` is a valid [`FootnoteDefinition`](https://github.com/syntax-tree/mdast/#footnotedefinition) node.
 
-### `isHTML(node: unknown): node is HTML`
+### `isFootnoteReference(value: unknown): value is FootnoteReference`
 
-Test if a given value is a valid Mdast `HTML` node.
+Test if a given value is a valid [`FootnoteReference`](https://github.com/syntax-tree/mdast/#footnotereference) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `HTML` node.
+Returns `true` if `value` is a valid [`FootnoteReference`](https://github.com/syntax-tree/mdast/#footnotereference) node.
 
-### `isImage(node: unknown): node is Image`
+### `isHeading(value: unknown): value is Heading`
 
-Test if a given value is a valid Mdast `Image` node.
+Test if a given value is a valid [`Heading`](https://github.com/syntax-tree/mdast/#heading) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Image` node.
+Returns `true` if `value` is a valid [`Heading`](https://github.com/syntax-tree/mdast/#heading) node.
 
-### `isImageReference(node: unknown): node is ImageReference`
+### `isHTML(value: unknown): value is HTML`
 
-Test if a given value is a valid Mdast `ImageReference` node.
+Test if a given value is a valid [`Html`](https://github.com/syntax-tree/mdast/#html) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `ImageReference` node.
+Returns `true` if `value` is a valid [`Html`](https://github.com/syntax-tree/mdast/#html) node.
 
-### `isInlineCode(node: unknown): node is InlineCode`
+### `isImage(value: unknown): value is Image`
 
-Test if a given value is a valid Mdast `InlineCode` node.
+Test if a given value is a valid [`Image`](https://github.com/syntax-tree/mdast/#image) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `InlineCode` node.
+Returns `true` if `value` is a valid [`Image`](https://github.com/syntax-tree/mdast/#image) node.
 
-### `isLinkReference(node: unknown): node is LinkReference`
+### `isImageReference(value: unknown): value is ImageReference`
 
-Test if a given value is a valid Mdast `LinkReference` node.
+Test if a given value is a valid [`Image`](https://github.com/syntax-tree/mdast/#imagereference) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `LinkReference` node.
+Returns `true` if `value` is a valid [`Image`](https://github.com/syntax-tree/mdast/#imagereference) node.
 
-### `isLink(node: unknown): node is Link`
+### `isInlineCode(value: unknown): value is InlineCode`
 
-Test if a given value is a valid Mdast `Link` node.
+Test if a given value is a valid [`InlineCode`](https://github.com/syntax-tree/mdast/#inlinecode) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Link` node.
+Returns `true` if `value` is a valid [`InlineCode`](https://github.com/syntax-tree/mdast/#inlinecode) node.
 
-### `isList(node: unknown): node is List`
+### `isLinkReference(value: unknown): value is LinkReference`
 
-Test if a given value is a valid Mdast `List` node.
+Test if a given value is a valid [`LinkReference`](https://github.com/syntax-tree/mdast/#linkreference) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `List` node.
+Returns `true` if `value` is a valid [`LinkReference`](https://github.com/syntax-tree/mdast/#linkreference) node.
 
-### `isListItem(node: unknown): node is ListItem`
+### `isLink(value: unknown): value is Link`
 
-Test if a given value is a valid Mdast `ListItem` node.
+Test if a given value is a valid [`Link`](https://github.com/syntax-tree/mdast/#link) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `ListItem` node.
+Returns `true` if `value` is a valid [`Link`](https://github.com/syntax-tree/mdast/#link) node.
 
-### `isLiteral(node: unknown): node is Literal`
+### `isList(value: unknown): value is List`
 
-Test is a given value is a valid Unist literal node.
+Test if a given value is a valid [`List`](https://github.com/syntax-tree/mdast/#list) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Unist literal node.
+Returns `true` if `value` is a valid [`List`](https://github.com/syntax-tree/mdast/#list) node.
 
-### `isNode(node: unknown): node is Node`
+### `isListContent(value: unknown): value is ListContent`
 
-Test is a given value is a valid Unist node.
+Test if a given value is a valid list content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Unist node.
+Returns `true` if `value` is a valid list content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
-### `isParent(node: unknown): node is Parent`
 
-Test is a given value is a valid Unist parent node.
+### `isListItem(value: unknown): value is ListItem`
+
+Test if a given value is a valid [`ListItem`](https://github.com/syntax-tree/mdast/#listitem) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Unist parent node.
+Returns `true` if `value` is a valid [`ListItem`](https://github.com/syntax-tree/mdast/#listitem) node.
 
-### `isParagraph(node: unknown): node is Paragraph`
+### `isLiteral(value: unknown): value is Literal`
 
-Test if a given value is a valid Mdast `Paragraph` node.
+Test is a given value is a valid [`Literal`](https://github.com/syntax-tree/mdast/#literal) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Paragraph` node.
+Returns `true` if `value` is a valid Unist literal value.
 
-### `isReference(node: unknown): node is Reference`
+### `isNode(value: unknown): value is Node`
 
-Test if a given value is a valid Mdast `Reference` node.
+Test if a given value is a valid [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Reference` node.
+Returns `true` if `value` is a valid [`Node`](https://github.com/syntax-tree/mdast/#node).
 
-### `isResource(node: unknown): node is Resource`
+### `isParagraph(value: unknown): value is Paragraph`
 
-Test if a given value is a valid Mdast `Resource` node.
+Test if a given value is a valid [`Paragraph`](https://github.com/syntax-tree/mdast/#paragraph) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Resource` node.
+Returns `true` if `value` is a valid [`Paragraph`](https://github.com/syntax-tree/mdast/#paragraph) node.
 
-### `isStrong(node: unknown): node is Strong`
+### `isParent(value: unknown): value is Parent`
 
-Test if a given value is a valid Mdast `Strong` node.
+Test is a given value is a valid [`Parent`](https://github.com/syntax-tree/mdast/#parent) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Strong` node.
+Returns `true` if `value` is a valid [`Parent`](https://github.com/syntax-tree/mdast/#parent) node.
 
-### `isTable(node: unknown): node is Table`
+### `isPhrasingContent(value: unknown): value is PhrasingContent`
 
-Test if a given value is a valid Mdast `Table` node.
+Test if the given value is a valid phrasing content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Table` node.
+Returns `true` if `value` is a valid phrasing content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
-### `isTableCell(node: unknown): node is TableCell`
+### `isReference(value: unknown): value is Reference`
 
-Test if a given value is a valid Mdast `TableCell` node.
+Test if a given value is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with a [`Reference`](https://github.com/syntax-tree/mdast/#reference).
+
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `TableCell` node.
+Returns `true` if `value` is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with a [`Reference`](https://github.com/syntax-tree/mdast/#reference).
 
-### `isTableRow(node: unknown): node is TableRow`
+### `isResource(value: unknown): value is Resource`
 
-Test if a given value is a valid Mdast `TableRow` node.
+Test if a given value is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with a [`Resource`](https://github.com/syntax-tree/mdast/#resource).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `TableRow` node.
+Returns `true` if `value` is a valid [`Node`](https://github.com/syntax-tree/mdast/#node) with a [`Resource`](https://github.com/syntax-tree/mdast/#resource).
 
-### `isText(node: unknown): node is Text`
+### `isRoot(value: unknown): value is Root`
 
-Test if a given value is a valid Mdast `Text` node.
+Test if a given value is a valid [`Root`](https://github.com/syntax-tree/mdast/#root) node.
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Text` node.
+Returns `true` if `value` is a valid [`Root`](https://github.com/syntax-tree/mdast/#root) node.
 
-### `isThematicBreak(node: unknown): node is ThematicBreak`
+### `isRootContent(value: unknown): value is RootContent`
 
-Test if a given value is a valid Mdast `ThematicBreak` node.
+Test if the given value is a valid root content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `ThematicBreak` node.
+Returns `true` if `value` is a valid root content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
-### `isYaml(node: unknown): node is Yaml`
+### `isRowContent(value: unknown): value is RowContent`
 
-Test if a given value is a valid Mdast `Yaml` node.
+Test if the given value is a valid row content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
 ###### Parameters
 
-* `node` (`unknown`)
+* `value` (`unknown`)
 	- value to check.
 
 ###### Returns
 
-Returns `true` if `node` is a valid Mdast `Yaml` node.
+Returns `true` if `value` is a valid row content [`Node`](https://github.com/syntax-tree/mdast/#node).
 
+### `isStrong(value: unknown): value is Strong`
+
+Test if a given value is a valid [`Strong`](https://github.com/syntax-tree/mdast/#strong) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`Strong`](https://github.com/syntax-tree/mdast/#strong) node.
+
+### `isTable(value: unknown): value is Table`
+
+Test if a given value is a valid [`Table`](https://github.com/syntax-tree/mdast/#table) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`Table`](https://github.com/syntax-tree/mdast/#table) node.
+
+### `isTableContent(value: unknown): value is TableContent`
+
+Test if the given value is a valid table content [`Node`](https://github.com/syntax-tree/mdast/#node).
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid table content [`Node`](https://github.com/syntax-tree/mdast/#node).
+
+### `isTableCell(value: unknown): value is TableCell`
+
+Test if a given value is a valid [`TableCell`](https://github.com/syntax-tree/mdast/#tablecell) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`TableCell`](https://github.com/syntax-tree/mdast/#tablecell) node.
+
+### `isTableRow(value: unknown): value is TableRow`
+
+Test if a given value is a valid [`TableRow`](https://github.com/syntax-tree/mdast/#tablerow) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`TableRow`](https://github.com/syntax-tree/mdast/#tablerow) node.
+
+
+### `isText(value: unknown): value is Text`
+
+Test if a given value is a valid [`Text`](https://github.com/syntax-tree/mdast/#text) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`Text`](https://github.com/syntax-tree/mdast/#text) node.
+
+### `isThematicBreak(value: unknown): value is ThematicBreak`
+
+Test if a given value is a valid [`ThematicBreak`](https://github.com/syntax-tree/mdast/#thematicbreak) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`ThematicBreak`](https://github.com/syntax-tree/mdast/#themeaticbreak) node.
+
+### `isYaml(value: unknown): value is Yaml`
+
+Test if a given value is a valid [`Yaml`](https://github.com/syntax-tree/mdast/#yaml) node.
+
+###### Parameters
+
+* `value` (`unknown`)
+	- value to check.
+
+###### Returns
+
+Returns `true` if `value` is a valid [`Yaml`](https://github.com/syntax-tree/mdast/#yaml) node.
 
 ## Tests
 
@@ -530,34 +583,34 @@ npm test
 
 [MIT](https://raw.githubusercontent.com/accuser/unist-util-type-guards/main/LICENSE)
 
-[api-isassociation]: #isassociationnode-unknown-node-is-association
-[api-isblockquote]: #isblockquotenode-unknown-node-is-blockquote
-[api-isbreak]: #isbreaknode-unknown-node-is-break
-[api-iscode]: #iscodenode-unknown-node-is-code
-[api-isdefinition]: #isdefinitionnode-unknown-node-is-definition
-[api-isdelete]: #isdeletenode-unknown-node-is-delete
-[api-isemphasis]: #isemphasisnode-unknown-node-is-emphasis
-[api-isfootnotedefinition]: #isfootnotedefinitionnode-unknown-node-is-footnotedefinition
-[api-isfootnotereference]: #isfootnotereferencenode-unknown-node-is-footnotereference
-[api-isheading]: #isheadingnode-unknown-node-is-heading
-[api-ishtml]: #ishtmlnode-unknown-node-is-html
-[api-isimage]: #isimagenode-unknown-node-is-image
-[api-isimagereference]: #isimagereferencenode-unknown-node-is-imagereference
-[api-isinlinecode]: #isinlinecodenode-unknown-node-is-inlinecode
-[api-islinkreference]: #islinkreferencenode-unknown-node-is-linkreference
-[api-islink]: #islinknode-unknown-node-is-link
-[api-islist]: #islistnode-unknown-node-is-list
-[api-islistitem]: #islistitemnode-unknown-node-is-listitem
-[api-isliteral]: #isliteralnode-node-unknown-node-is-literal
-[api-isnode]: #isnodenode-unknown-node-is-node
-[api-isparagraph]: #isparagraphnode-unknown-node-is-paragraph
-[api-isparent]: #isparentnode-node-unknown-node-is-parent
-[api-isreference]: #isreferencenode-unknown-node-is-reference
-[api-isresource]: #isresourcenode-unknown-node-is-resource
-[api-isstrong]: #isstrongnode-unknown-node-is-strong
-[api-istable]: #istablenode-unknown-node-is-table
-[api-istablecell]: #istablecellnode-unknown-node-is-tablecell
-[api-istablerow]: #istablerownode-unknown-node-is-tablerow
-[api-istext]: #istextnode-unknown-node-is-text
-[api-isthematicbreak]: #isthematicbreaknode-unknown-node-is-thematicbreak
-[api-isyaml]: #isyamlnode-unknown-node-is-yaml
+[api-isassociation]: #isassociationnode-unknown-value-is-association
+[api-isblockquote]: #isblockquotenode-unknown-value-is-blockquote
+[api-isbreak]: #isbreaknode-unknown-value-is-break
+[api-iscode]: #iscodenode-unknown-value-is-code
+[api-isdefinition]: #isdefinitionnode-unknown-value-is-definition
+[api-isdelete]: #isdeletenode-unknown-value-is-delete
+[api-isemphasis]: #isemphasisnode-unknown-value-is-emphasis
+[api-isfootnotedefinition]: #isfootnotedefinitionnode-unknown-value-is-footnotedefinition
+[api-isfootnotereference]: #isfootnotereferencenode-unknown-value-is-footnotereference
+[api-isheading]: #isheadingnode-unknown-value-is-heading
+[api-ishtml]: #ishtmlnode-unknown-value-is-html
+[api-isimage]: #isimagenode-unknown-value-is-image
+[api-isimagereference]: #isimagereferencenode-unknown-value-is-imagereference
+[api-isinlinecode]: #isinlinecodenode-unknown-value-is-inlinecode
+[api-islinkreference]: #islinkreferencenode-unknown-value-is-linkreference
+[api-islink]: #islinknode-unknown-value-is-link
+[api-islist]: #islistnode-unknown-value-is-list
+[api-islistitem]: #islistitemnode-unknown-value-is-listitem
+[api-isliteral]: #isliteralnode-value-unknown-value-is-literal
+[api-isnode]: #isnodenode-unknown-value-is-value
+[api-isparagraph]: #isparagraphnode-unknown-value-is-paragraph
+[api-isparent]: #isparentnode-value-unknown-value-is-parent
+[api-isreference]: #isreferencenode-unknown-value-is-reference
+[api-isresource]: #isresourcenode-unknown-value-is-resource
+[api-isstrong]: #isstrongnode-unknown-value-is-strong
+[api-istable]: #istablenode-unknown-value-is-table
+[api-istablecell]: #istablecellnode-unknown-value-is-tablecell
+[api-istablerow]: #istablerownode-unknown-value-is-tablerow
+[api-istext]: #istextnode-unknown-value-is-text
+[api-isthematicbreak]: #isthematicbreaknode-unknown-value-is-thematicbreak
+[api-isyaml]: #isyamlnode-unknown-value-is-yaml
