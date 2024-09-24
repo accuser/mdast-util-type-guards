@@ -2,7 +2,7 @@ import { isParent } from '@accuser/mdast-util-type-guards';
 import { describe, expect, it } from 'vitest';
 
 describe('isParent', () => {
-	it('returns `true` for a Node node', () => {
+	it('returns `true` for a Parent node', () => {
 		expect(isParent({ type: 'tree', children: [] })).toBe(true);
 	});
 
