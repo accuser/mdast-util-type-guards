@@ -1,4 +1,4 @@
-import { isMonoparous } from '@accuser/unist-util-type-guards';
+import { isMonoparous } from '@accuser/mdast-util-type-guards';
 import { describe, expect, it } from 'vitest';
 
 describe('isMonoparous', () => {

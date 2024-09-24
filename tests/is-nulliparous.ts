@@ -1,4 +1,4 @@
-import { isNulliparous } from '@accuser/unist-util-type-guards';
+import { isNulliparous } from '@accuser/mdast-util-type-guards';
 import { describe, expect, it } from 'vitest';
 
 describe('isNulliparous', () => {
